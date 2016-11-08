@@ -1,26 +1,29 @@
 ## BUILDING
 ##   (from project root directory)
-##   $ docker build -t postgresql-for-andreslopezalbin-eventos-app-backend .
+##   $ docker build -t python-for-andreslopezalbin-eventos-app-backend .
 ##
 ## RUNNING
-##   $ docker run -p 5432:5432 postgresql-for-andreslopezalbin-eventos-app-backend
-##
-## CONNECTING
-##   Lookup the IP of your active docker host using:
-##     $ docker-machine ip $(docker-machine active)
-##   Connect to the container at DOCKER_IP:5432
-##     replacing DOCKER_IP for the IP of your active docker host
-##
-## NOTES
-##   This is a prebuilt version of PostgreSQL.
-##   For more information and documentation visit:
-##     https://github.com/bitnami/bitnami-docker-postgresql
+##   $ docker run python-for-andreslopezalbin-eventos-app-backend
 
-FROM gcr.io/bitnami-containers/postgresql:9.5.3-r1
+FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
 
-ENV STACKSMITH_STACK_ID="2mutmyq" \
-    STACKSMITH_STACK_NAME="PostgreSQL for andreslopezalbin/eventos-app-backend" \
-    STACKSMITH_STACK_PRIVATE="1" \
-    BITNAMI_CONTAINER_ORIGIN="stacksmith"
+MAINTAINER Bitnami <containers@bitnami.com>
+
+ENV STACKSMITH_STACK_ID="vc7g8ws" \
+    STACKSMITH_STACK_NAME="Python for andreslopezalbin/eventos-app-backend" \
+    STACKSMITH_STACK_PRIVATE="1"
+
+RUN bitnami-pkg install python-2.7.12-1 --checksum 1ab49b32453c509cf6ff3abb9dbe8a411053e3b811753a10c7a77b4bc19606df
+
+ENV PATH=/opt/bitnami/python/bin:$PATH
 
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
+
+# Django template
+COPY . /app
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
