@@ -1,5 +1,10 @@
-# eventos-app-backend
+# EventosApp
 
-Esta es la inicalizaciÛn del TFG desarrollado por los alumnos de la Escuela TÈcnica de IngenirÌa Inform·tica de Sevilla
-- Antonio Marcos PeÒa
-- AndrÈs LÛpez AlbÌn
+Esta es la inicalizaci√≥n del TFG desarrollado por los alumnos de la Escuela T√©cnica de Ingenir√≠a Inform√°tica de Sevilla
+- Antonio Marcos Pe√±a
+- Andr√©s L√≥pez Alb√≠n
+
+Tecnolog√≠as que vamos a utilizar:
+- Django + Taspypie o Django-Rest
+- Ionic
+- Docker
